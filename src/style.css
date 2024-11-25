@@ -1,3 +1,17 @@
 .green {
     color: #00ff00;
 }
+
+.table {
+    width: 60%; 
+    margin: 0%; 
+    font-size: 14px; 
+}
+
+.table td, .table th {
+    padding: 8px; /
+}
+
+.table mb-4{
+    width: 10%;
+}

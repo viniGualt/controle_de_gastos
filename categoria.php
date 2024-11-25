@@ -19,7 +19,7 @@ $categorias = mysqli_query($conn, $sql);
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light" id="nav">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" id="nav">
         <div class="container-fluid p-3 pb-1 pt-1 align-bottom justify-content-between">
             <a href="#nav" class="navbar-brand text-dark mb-0 h1">
                 <img src="" height="30vh" class="d-inline-block align-text-top">

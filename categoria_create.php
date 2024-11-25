@@ -30,7 +30,7 @@ require_once('conexao.php');
                         <input type="number" id="numero_categoria" name="numero_categoria" class="form-control" required>
                     </div>
                     <button type="submit" name="create_categoria" class="btn btn-primary">Salvar</button>
-                    <a href="lista.php" class="btn btn-danger float-end">Voltar</a>
+                    <a href="categoria.php" class="btn btn-danger float-end">Voltar</a>
                 </div>
             </form>
         </div>

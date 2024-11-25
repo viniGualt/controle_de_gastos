@@ -9,7 +9,7 @@ if (isset($_POST['mes_create'])) {
     $sql = "INSERT INTO meses (nome_mes, ano) VALUES ('$nome_mes', '$ano')";
 
     if (mysqli_query($conn, $sql)) {
-        header('Location: lista.php');
+        header('Location: meses.php');
         exit();
     } else {
         echo "Erro ao inserir o mês: " . mysqli_error($conn);
@@ -30,7 +30,7 @@ if (isset($_POST['delete_mes'])) {
         $_SESSION['message'] = "Não foi possível excluir o mês.";
         $_SESSION['type'] = 'error';
     }
-    header('Location: lista.php');
+    header('Location: meses.php');
     exit;
 }
 

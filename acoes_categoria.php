@@ -10,7 +10,7 @@ if (isset($_POST['create_categoria'])) {
             VALUES ('$nome_categoria', '$numero_categoria')";
 
     if (mysqli_query($conn, $sql)) {
-        header('Location: lista.php');
+        header('Location: categoria.php');
         exit();
     } else {
         echo "Erro ao inserir a categoria: " . mysqli_error($conn);
@@ -32,7 +32,7 @@ if (isset($_POST['delete_categoria'])) {
         $_SESSION['type'] = 'error';
     }
 
-    header('Location: lista.php');
+    header('Location: categoria.php');
     exit;
 }
 
@@ -56,7 +56,7 @@ if (isset($_POST['edit_categoria'])) {
         $_SESSION['type'] = 'error';
     }
 
-    header("Location: lista.php");
+    header("Location: categoria.php");
     exit;
 }
 

@@ -5,7 +5,7 @@ require_once('conexao.php');
 $contabilidade = [];
 
 if (!isset($_GET['id_mes']) || empty($_GET['id_mes'])) {
-    header('Location: lista.php');
+    header('Location: meses.php');
     exit();
 } else {
     $id_mes = mysqli_real_escape_string($conn, $_GET['id_mes']); 

@@ -5,7 +5,7 @@ require_once('conexao.php');
 $categoria = [];
 
 if (!isset($_GET['id_categoria']) || empty($_GET['id_categoria'])) {
-    header('Location: lista.php');
+    header('Location: categoria.php');
 } else {
     $id_categoria = mysqli_real_escape_string($conn, $_GET['id_categoria']);
     $sql = "SELECT * FROM lista_categoria WHERE id_categoria = '{$id_categoria}'";
@@ -47,7 +47,7 @@ if (!isset($_GET['id_categoria']) || empty($_GET['id_categoria'])) {
                             <input type="number" id="numero_categoria" name="numero_categoria" class="form-control" value="<?= $categoria['numero_categoria'] ?>" required>
                         </div>
                         <button type="submit" name="edit_categoria" class="btn btn-primary">Editar categoria</button>
-                        <a href="lista.php" class="btn btn-danger float-end">Voltar</a>
+                        <a href="categoria.php" class="btn btn-danger float-end">Voltar</a>
                     </div>
                 </div>
             </form>
