@@ -14,6 +14,7 @@ require_once('conexao.php');
 </head>
 
 <body>
+    <?php include 'navbar.php'; ?>
     <div class="container mt-5">
         <h1 class="mb-4">Cadastro de Mês</h1>
         <div class="card mb-4">

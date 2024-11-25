@@ -15,6 +15,7 @@ require_once('conexao.php');
 
 
 <body>
+    <?php include 'navbar.php'; ?>
     <div class="container mt-5" style="max-width: 800px; margin: 0 auto;">
         <h1 class="mb-4">Cadastro de Categorias</h1>
         <div class="card mb-4">

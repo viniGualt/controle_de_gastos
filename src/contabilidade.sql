@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 26/11/2024 às 00:06
+-- Tempo de geração: 26/11/2024 às 00:47
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `lista_categoria` (
-  `id_categoria` bigint(20) NOT NULL,
+  `id_categoria` int(20) NOT NULL,
   `nome_categoria` varchar(150) NOT NULL,
   `gasto_categoria` decimal(10,2) NOT NULL,
   `numero_categoria` int(20) NOT NULL
@@ -56,6 +56,27 @@ CREATE TABLE `meses` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Despejando dados para a tabela `meses`
+--
+
+INSERT INTO `meses` (`id_mes`, `nome_mes`, `ano`) VALUES
+(1, '1', -2041);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `movimentacoes`
+--
+
+CREATE TABLE `movimentacoes` (
+  `id` bigint(20) NOT NULL,
+  `data` int(11) NOT NULL,
+  `valor` decimal(8,2) NOT NULL,
+  `id_categoria` int(11) NOT NULL,
+  `descricao` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
 -- Índices para tabelas despejadas
 --
 
@@ -72,6 +93,14 @@ ALTER TABLE `meses`
   ADD PRIMARY KEY (`id_mes`);
 
 --
+-- Índices de tabela `movimentacoes`
+--
+ALTER TABLE `movimentacoes`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `data` (`data`),
+  ADD KEY `id_categoria` (`id_categoria`);
+
+--
 -- AUTO_INCREMENT para tabelas despejadas
 --
 
@@ -79,13 +108,30 @@ ALTER TABLE `meses`
 -- AUTO_INCREMENT de tabela `lista_categoria`
 --
 ALTER TABLE `lista_categoria`
-  MODIFY `id_categoria` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_categoria` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de tabela `meses`
 --
 ALTER TABLE `meses`
-  MODIFY `id_mes` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_mes` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de tabela `movimentacoes`
+--
+ALTER TABLE `movimentacoes`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- Restrições para tabelas despejadas
+--
+
+--
+-- Restrições para tabelas `movimentacoes`
+--
+ALTER TABLE `movimentacoes`
+  ADD CONSTRAINT `movimentacoes_ibfk_1` FOREIGN KEY (`data`) REFERENCES `meses` (`id_mes`),
+  ADD CONSTRAINT `movimentacoes_ibfk_2` FOREIGN KEY (`id_categoria`) REFERENCES `lista_categoria` (`id_categoria`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
