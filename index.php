@@ -30,13 +30,13 @@ $sql = 'SELECT * FROM tabela';
             <div class="collapse navbar-collapse" id="navbar-collapse">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Início</a>
+                        <a class="nav-link" href="index.php">Início</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Categorias</a>
+                        <a class="nav-link" href="categoria.php">Categorias</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Meses</a>
+                        <a class="nav-link" href="meses.php">Meses</a>
                     </li>
                 </ul>
             </div>
