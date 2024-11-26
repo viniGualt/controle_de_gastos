@@ -38,12 +38,11 @@ $categorias = mysqli_query($conn, $sql);
                     </li>
                 </ul>
             </div>
-            <a href="#" class="btn btn-success float-end text-light"><b>Adicionar</b></a>
+            <a href="categoria_create.php" class="btn btn-success">Adicionar categoria</a>
     </nav>
     <div class="container mt-5">
         <div class="d-flex justify-content-between align-items-center mb-4" style="max-width: 800px; margin: 0 auto;">
             <h1 class="mb-0">Lista de Categorias</h1>
-            <a href="categoria_create.php" class="btn btn-success">Adicionar categoria</a>
         </div>
         <div class="card mb-4 border border-dark" style="max-width: 800px; margin: 0 auto;">
             <div class="card-body">
@@ -52,21 +51,17 @@ $categorias = mysqli_query($conn, $sql);
                         <tr>
                             <th>Nº</th>
                             <th>Categoria</th>
-                            <th>Gastos</th>
                             <th class="text-center">Ações</th>
                         </tr>
                     </thead>
                     <tbody>
+                       <?php $contador = 1;?>
                         <?php foreach ($categorias as $categoria): ?>
                             <tr>
-                                <td><?php echo $categoria['numero_categoria']; ?></td>
+                                <td><?php echo $contador++; ?></td>
                                 <td><?php echo $categoria['nome_categoria']; ?></td>
-                                <td><?php echo $categoria['gasto_categoria']; ?></td>
                                 <td class="text-center">
                                     <div class="d-flex justify-content-center align-items-center gap-3">
-                                        <a href="consulta_categoria.php?id=<?= $categoria['id_categoria'] ?>" class="btn btn-primary btn-sm">
-                                            Consultar
-                                        </a>
                                         <a href="edit_categoria.php?id_categoria=<?= $categoria['id_categoria'] ?>" class="btn btn-warning btn-sm">
                                             <i class="bi bi-pencil-fill"></i> Editar
                                         </a>

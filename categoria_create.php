@@ -15,6 +15,7 @@ require_once('conexao.php');
 
 
 <body>
+    <?php include 'navbar.php'; ?>
     <div class="container mt-5" style="max-width: 800px; margin: 0 auto;">
         <h1 class="mb-4">Cadastro de Categorias</h1>
         <div class="card mb-4">
@@ -25,12 +26,8 @@ require_once('conexao.php');
                         <label for="nome_categoria" class="form-label">Nome da Categoria</label>
                         <input type="text" id="nome_categoria" name="nome_categoria" class="form-control" placeholder="Ex: Alimentação" required>
                     </div>
-                    <div class="mb-3">
-                        <label for="numero_categoria" class="form-label">Número da Categoria</label>
-                        <input type="number" id="numero_categoria" name="numero_categoria" class="form-control" required>
-                    </div>
-                    <button type="submit" name="create_categoria" class="btn btn-primary">Salvar</button>
-                    <a href="categoria.php" class="btn btn-danger float-end">Voltar</a>
+                    <button type="submit" name="create_categoria" class="btn btn-primary float-end">Salvar categoria</button>
+                    <a href="categoria.php" class="btn btn-danger">Voltar</a>
                 </div>
             </form>
         </div>

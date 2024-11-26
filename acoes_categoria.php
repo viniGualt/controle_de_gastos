@@ -4,10 +4,9 @@ require_once('conexao.php');
 
 if (isset($_POST['create_categoria'])) {
     $nome_categoria = mysqli_real_escape_string($conn, $_POST['nome_categoria']);
-    $numero_categoria = mysqli_real_escape_string($conn, $_POST['numero_categoria']);
 
-    $sql = "INSERT INTO lista_categoria (nome_categoria, numero_categoria) 
-            VALUES ('$nome_categoria', '$numero_categoria')";
+    $sql = "INSERT INTO lista_categoria (nome_categoria) 
+            VALUES ('$nome_categoria')";
 
     if (mysqli_query($conn, $sql)) {
         header('Location: categoria.php');
@@ -39,9 +38,8 @@ if (isset($_POST['delete_categoria'])) {
 if (isset($_POST['edit_categoria'])) {
     $id_categoria = mysqli_real_escape_string($conn, $_POST['id_categoria']);
     $nome_categoria = mysqli_real_escape_string($conn, $_POST['nome_categoria']);
-    $numero_categoria = mysqli_real_escape_string($conn, $_POST['numero_categoria']);
 
-    $sql = "UPDATE lista_categoria SET nome_categoria = '{$nome_categoria}', numero_categoria = '{$numero_categoria}' WHERE id_categoria = '{$id_categoria}'";
+    $sql = "UPDATE lista_categoria SET nome_categoria = '{$nome_categoria}' WHERE id_categoria = '{$id_categoria}'";
 
     if (mysqli_query($conn, $sql)) {
         if (mysqli_affected_rows($conn) > 0) {

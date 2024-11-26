@@ -31,6 +31,8 @@ if (!isset($_GET['id_categoria']) || empty($_GET['id_categoria'])) {
 </head>
 
 <body>
+   <?php include 'navbar.php';?>
+
     <div class="container mt-5" style="max-width: 800px; margin: 0 auto;">
         <h1 class="mb-4">Edição da Categoria</h1>
         <?php if (!empty($categoria)): ?>
@@ -42,12 +44,8 @@ if (!isset($_GET['id_categoria']) || empty($_GET['id_categoria'])) {
                             <label for="nome_categoria" class="form-label">Nome da Categoria</label>
                             <input type="text" id="nome_categoria" name="nome_categoria" class="form-control" value="<?= $categoria['nome_categoria'] ?>" required>
                         </div>
-                        <div class="mb-3">
-                            <label for="numero_categoria" class="form-label">Número da Categoria</label>
-                            <input type="number" id="numero_categoria" name="numero_categoria" class="form-control" value="<?= $categoria['numero_categoria'] ?>" required>
-                        </div>
-                        <button type="submit" name="edit_categoria" class="btn btn-primary">Editar categoria</button>
-                        <a href="categoria.php" class="btn btn-danger float-end">Voltar</a>
+                        <a href="categoria.php" class="btn btn-danger">Voltar</a>
+                        <button type="submit" name="edit_categoria" class="btn btn-primary float-end">Editar categoria</button>
                     </div>
                 </div>
             </form>
