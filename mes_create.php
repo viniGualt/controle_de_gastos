@@ -15,7 +15,7 @@ require_once('conexao.php');
 
 <body>
     <?php include 'navbar.php'; ?>
-    <div class="container mt-5">
+    <div class="container mt-5" style="max-width: 800px; margin: 0 auto;">
         <h1 class="mb-4">Cadastro de Mês</h1>
         <div class="card mb-4">
             <form action="acoes_mes.php" method="POST">
@@ -41,7 +41,7 @@ require_once('conexao.php');
                     </div>
                     <div class="mb-3">
                         <label for="ano" class="form-label">Ano:</label>
-                        <input type="number" id="ano" name="ano" class="form-control" required>
+                        <input type="number" id="ano" name="ano" min="2000" max="2050" class="form-control" required>
                     </div>
                     <button type="submit" name="mes_create" class="btn btn-primary">Salvar</button>
                 </div>
