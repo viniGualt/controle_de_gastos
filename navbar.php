@@ -16,7 +16,7 @@
                         <a class="nav-link" href="meses.php">Meses</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="financas.php">Movimentações</a>
+                        <a class="nav-link" href="movimentacoes.php">Movimentações</a>
                     </li>
                 </ul>
             </div>

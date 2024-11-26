@@ -68,10 +68,10 @@ $movimentacoes = mysqli_query($conn, $sql);
                             <td><?php echo $movimentacao['descricao']; ?></td>
                             <td>
                                 <div class="d-flex align-items-center gap-2">
-                                    <a href="edit_mes.php?id=<?= $movimentacao['id'] ?>" class="btn btn-warning btn-sm">
+                                    <a href="edit_movimentacao.php?id=<?= $movimentacao['id'] ?>" class="btn btn-warning btn-sm">
                                         <i class="bi bi-pencil-fill"></i>Editar</a>
-                                    <form action="acoes_mes.php" method="POST" class="d-inline">
-                                        <button onclick="return confirm('Tem certeza que deseja excluir?')" name="delete_mes" type="submit" value="<?= $movimentacao['id']; ?>" class="btn btn-danger btn-sm">
+                                    <form action="acoes_movimentacao.php" method="POST" class="d-inline">
+                                        <button onclick="return confirm('Tem certeza que deseja excluir?')" name="delete_movimentacao" type="submit" value="<?= $movimentacao['id']; ?>" class="btn btn-danger btn-sm">
                                             <i class="bi bi-trash-fill"></i>Excluir
                                         </button>
                                     </form>
