@@ -2,9 +2,9 @@
 session_start();
 require_once('conexao.php');
 
-$sql = 'SELECT * FROM tabela';
+$sql = 'SELECT * FROM movimentacoes';
 
-// $tabela = mysqli_query($conn, $sql);
+$movimentacoes = mysqli_query($conn, $sql);
 
 ?>
 
