@@ -40,6 +40,4 @@ if (isset($_POST['edit_movimentacoes'])) {
     header("Location: index.php");
     exit;
 }
-
-
 ?>
