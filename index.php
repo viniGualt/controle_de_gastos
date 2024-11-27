@@ -2,9 +2,13 @@
 session_start();
 require_once('conexao.php');
 
-$sql = 'SELECT * FROM movimentacoes';
+$sql = 'SELECT mov.*, mes.nome_mes. mes.ano, cat.nome_categoria FROM movimentacoes mov
+        JOIN meses mes ON mov.data = mes.id_mes
+        JOIN lista_categoria cat ON cat.id_categoria = mov.id_categoria';
 
 $movimentacoes = mysqli_query($conn, $sql);
+
+$saldo = 0;
 
 ?>
 
@@ -27,7 +31,7 @@ $movimentacoes = mysqli_query($conn, $sql);
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Lista de finanças</h4>
+                        <h4>Lista de Finanças</h4>
                     </div>
                     <div class="card-body">
                         <table class="table table-bordered table-striped">
@@ -41,20 +45,35 @@ $movimentacoes = mysqli_query($conn, $sql);
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Janeiro/2024</td>
-                                    <td>R$ 200,00</td>
-                                    <td>Alimentação</td>
-                                    <td>Gasto com McDonalds</td>
-                                    <td class="green">+R$200,00</td>
-                                </tr>
+                                <?php
+                                while ($movimentacao = mysqli_fetch_assoc($movimentacoes)) {
+                                    $mesAno = $movimentacao['nome_mes'] . '/' . $movimentacao['ano'];
+                                    $valor = $movimentacao['valor'];
+                                    $categoria = $movimentacao['nome_categoria'];
+                                    $descricao = $movimentacao['descricao'];
+
+                                    $saldo += $valor;
+
+                                    echo "<tr>
+                                            <td>{$mesAno}</td>                                    
+                                            <td>R$ " . number_format($valor, 2, ',','.') . "</td>
+                                            <td>{$categoria}</td>
+                                            <td>{$descricao}</td>";
+                                            if ($valor > 0) {
+                                                echo "<td class='green'>+" . number_format($valor, 2, ',', '.') . "</td>";
+                                            } else {
+                                                "<td class='green'>+" . number_format($valor, 2, ',', '.') . "</td>";
+                                            }
+                                    echo  "</tr>";
+                                }
+                                ?>
                             </tbody>
                         </table>
                         <table class="table table-bordered table-striped w-25 float-end">
                             <thead>
                                 <tr>
                                     <th>Saldo Final:</th>
-                                    <td>R$ 200,00</td>
+                                    <td>R$ <?php echo number_format($saldo, 2, ',', '.');?></td>
                                 </tr>
                             </thead>
                         </table>
@@ -64,11 +83,8 @@ $movimentacoes = mysqli_query($conn, $sql);
         </div>
     </div>
 
-
-
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="./src/script.js"></script>
 </body>
 
-</html>
+</html>x
