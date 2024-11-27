@@ -2,7 +2,7 @@
 session_start();
 require_once('conexao.php');
 
-$sql = 'SELECT mov.*, mes.nome_mes. mes.ano, cat.nome_categoria FROM movimentacoes mov
+$sql = 'SELECT mov.*, mes.nome_mes, mes.ano, cat.nome_categoria FROM movimentacoes mov
         JOIN meses mes ON mov.data = mes.id_mes
         JOIN lista_categoria cat ON cat.id_categoria = mov.id_categoria';
 
@@ -62,7 +62,7 @@ $saldo = 0;
                                             if ($valor > 0) {
                                                 echo "<td class='green'>+" . number_format($valor, 2, ',', '.') . "</td>";
                                             } else {
-                                                "<td class='green'>+" . number_format($valor, 2, ',', '.') . "</td>";
+                                                "<td class='red'>+" . number_format($valor, 2, ',', '.') . "</td>";
                                             }
                                     echo  "</tr>";
                                 }
@@ -87,4 +87,4 @@ $saldo = 0;
     <script src="./src/script.js"></script>
 </body>
 
-</html>x
+</html>
