@@ -36,6 +36,9 @@ $categorias = mysqli_query($conn, $sql);
                     <li class="nav-item">
                         <a class="nav-link" href="meses.php">Meses</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="movimentacoes.php">Movimentações</a>
+                    </li>
                 </ul>
             </div>
             <a href="categoria_create.php" class="btn btn-success">Adicionar categoria</a>

@@ -8,6 +8,10 @@ $sql = 'SELECT mov.*, mes.nome_mes, mes.ano, cat.nome_categoria FROM movimentaco
 
 $movimentacoes = mysqli_query($conn, $sql);
 
+$sqlMeses = "SELECT * FROM meses ORDER BY ano, id_mes";
+$queryMeses = mysqli_query($conn, $sqlMeses);
+$filtroMes = isset($_GET['filtro_mes']);
+
 $saldo = 0;
 
 ?>
@@ -31,10 +35,21 @@ $saldo = 0;
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Lista de Finanças</h4>
+                        <h4 class="d-inline-flex">Lista de Finanças</h4>
+                        <form method="GET" class="d-flex align-items-center">
+                            <select name="filtro_mes" class="form-select me-2" style="width: auto;">
+                                <option value="">Todos os meses</option>
+                                <?php foreach ($queryMeses as $mes): ?>
+                                    <option value="<?= $mes['id_mes']; ?>" <?= $filtroMes == $mes['id_mes'] ? 'selected' : ''; ?>>
+                                        <?= $mes['nome_mes'] . ' / ' . $mes['ano']; ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                            <button type="submit" class="btn btn-primary btn-sm">Filtrar</button>
+                        </form>
                     </div>
                     <div class="card-body">
-                        <table class="table table-bordered table-striped">
+                        <table class="table table-bordered table-striped w-100 mb-3">
                             <thead>
                                 <tr>
                                     <th>Data</th>
@@ -45,35 +60,40 @@ $saldo = 0;
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php
-                                while ($movimentacao = mysqli_fetch_assoc($movimentacoes)) {
-                                    $mesAno = $movimentacao['nome_mes'] . '/' . $movimentacao['ano'];
-                                    $valor = $movimentacao['valor'];
-                                    $categoria = $movimentacao['nome_categoria'];
-                                    $descricao = $movimentacao['descricao'];
-
-                                    $saldo += $valor;
-
-                                    echo "<tr>
-                                            <td>{$mesAno}</td>                                    
-                                            <td>R$ " . number_format($valor, 2, ',','.') . "</td>
-                                            <td>{$categoria}</td>
-                                            <td>{$descricao}</td>";
-                                            if ($valor > 0) {
-                                                echo "<td class='green'>+" . number_format($valor, 2, ',', '.') . "</td>";
-                                            } else {
-                                                "<td class='red'>+" . number_format($valor, 2, ',', '.') . "</td>";
-                                            }
-                                    echo  "</tr>";
-                                }
-                                ?>
+                                <?php foreach ($movimentacoes as $movimentacao): ?>
+                                    <tr>
+                                        <td><?php echo $meses[$movimentacao['data']] . '/' . $movimentacao['ano']; ?></td>
+                                        <td>R$ <?php echo number_format($movimentacao['valor'], 2, ',', '.'); ?></td>
+                                        <td><?php echo $movimentacao['nome_categoria']; ?></td>
+                                        <td><?php echo $movimentacao['descricao']; ?></td>
+                                        <td class="<?php if ($movimentacao['valor'] > 0) {
+                                                        echo 'green';
+                                                    } elseif ($movimentacao['valor'] == 0) {
+                                                        echo 'yellow';
+                                                    } else {
+                                                        echo 'red';
+                                                    }; ?>">
+                                            R$ <?php echo number_format($movimentacao['valor'], 2, ',', '.'); ?>
+                                        </td>
+                                    </tr>
+                                    <?php $saldo += $movimentacao['valor']; ?>
+                                <?php endforeach; ?>
                             </tbody>
                         </table>
                         <table class="table table-bordered table-striped w-25 float-end">
                             <thead>
                                 <tr>
                                     <th>Saldo Final:</th>
-                                    <td>R$ <?php echo number_format($saldo, 2, ',', '.');?></td>
+                                    <td class="<?php if ($saldo > 0) {
+                                                    echo 'green';
+                                                } elseif ($saldo == 0) {
+                                                    echo 'yellow';
+                                                } else {
+                                                    echo 'red';
+                                                }
+                                                ?>">
+                                        R$ <?php echo number_format($saldo, 2, ',', '.'); ?>
+                                    </td>
                                 </tr>
                             </thead>
                         </table>

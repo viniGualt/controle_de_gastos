@@ -2,21 +2,6 @@
 session_start();
 require_once('conexao.php');
 
-$meses = [
-    1 => 'Janeiro',
-    2 => 'Fevereiro',
-    3 => 'Março',
-    4 => 'Abril',
-    5 => 'Maio',
-    6 => 'Junho',
-    7 => 'Julho',
-    8 => 'Agosto',
-    9 => 'Setembro',
-    10 => 'Outubro',
-    11 => 'Novembro',
-    12 => 'Dezembro'
-];
-
 $data = 1;
 $sql = "SELECT mov.*, mes.nome_mes, mes.ano, cat.nome_categoria, cat.numero_categoria FROM movimentacoes mov
         JOIN meses mes ON mov.data = mes.id_mes
@@ -47,7 +32,7 @@ $movimentacoes = mysqli_query($conn, $sql);
             <a href="movimentacao_create.php" class="btn btn-success rounded-circle float-end">+</a>
         </div>
         <div class="card-body">
-            <table class="table table-bordered table-striped">
+            <table class="table table-bordered table-striped w-100">
                 <thead>
                     <tr>
                         <th>ID</th>
