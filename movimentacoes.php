@@ -2,11 +2,9 @@
 session_start();
 require_once('conexao.php');
 
-$data = 1;
 $sql = "SELECT mov.*, mes.nome_mes, mes.ano, cat.nome_categoria, cat.numero_categoria FROM movimentacoes mov
         JOIN meses mes ON mov.data = mes.id_mes
-        JOIN lista_categoria cat ON cat.id_categoria = mov.id_categoria 
-        WHERE `data` = $data";
+        JOIN lista_categoria cat ON cat.id_categoria = mov.id_categoria";
 
 $movimentacoes = mysqli_query($conn, $sql);
 
@@ -47,7 +45,7 @@ $movimentacoes = mysqli_query($conn, $sql);
                     <?php foreach ($movimentacoes as $movimentacao): ?>
                         <tr>
                             <td><?php echo $movimentacao['id']; ?></td>
-                            <td><?php echo $meses[$movimentacao['data']] . "/" . $movimentacao['ano']; ?></td>
+                            <td><?php echo $meses[$movimentacao['nome_mes']] . "/" . $movimentacao['ano']; ?></td>
                             <td><?php echo $movimentacao['valor']; ?></td>
                             <td><?php echo $movimentacao['nome_categoria']; ?></td>
                             <td><?php echo $movimentacao['descricao']; ?></td>

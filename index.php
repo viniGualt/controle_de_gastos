@@ -73,7 +73,7 @@ $saldo = 0;
                             <tbody>
                                 <?php foreach ($movimentacoes as $movimentacao): ?>
                                     <tr>
-                                        <td><?php echo $meses[$movimentacao['data']] . '/' . $movimentacao['ano']; ?></td>
+                                        <td><?php echo $meses[$movimentacao['nome_mes']] . '/' . $movimentacao['ano']; ?></td>
                                         <td>R$ <?php echo number_format($movimentacao['valor'], 2, ',', '.'); ?></td>
                                         <td><?php echo $movimentacao['nome_categoria']; ?></td>
                                         <td><?php echo $movimentacao['descricao']; ?></td>
