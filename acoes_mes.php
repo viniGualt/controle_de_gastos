@@ -39,18 +39,23 @@ if (isset($_POST['edit_mes'])) {
     $nome_mes = mysqli_real_escape_string($conn, $_POST['nome_mes']);
     $ano = mysqli_real_escape_string($conn, $_POST['ano']);
 
-    $sql = "UPDATE contabilidade SET nome_mes = '{$nome_mes}', ano = '{$ano}' WHERE id_mes = '{$id_mes}'";
+    $sql = "UPDATE meses SET nome_mes = '{$nome_mes}', ano = '{$ano}' WHERE id_mes = '{$id_mes}'";
 
-    if (mysqli_affected_rows($conn) > 0) {
-        $_SESSION['message'] = "Mês {$nome_mes} editado com sucesso!";
-        $_SESSION['type'] = 'success';
+    if (mysqli_query($conn, $sql)) {
+        if (mysqli_affected_rows($conn) > 0) {
+            $_SESSION['message'] = "Mês editado com sucesso!";
+            $_SESSION['type'] = 'success';
+        } else {
+            $_SESSION['message'] = 'Não foi possível editar o mês';
+            $_SESSION['type'] = 'error';
+        }
     } else {
-        $_SESSION['message'] = 'Não foi possível editar o mês';
+        $_SESSION['message'] = 'Erro ao executar a atualização!';
         $_SESSION['type'] = 'error';
     }
 
-
-    header("Location: index.php");
+    header("Location: meses.php");
     exit;
 }
+
 ?>

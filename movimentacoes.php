@@ -44,7 +44,7 @@ $movimentacoes = mysqli_query($conn, $sql);
     <div class="container mt-5">
         <div class="card-header">
             <h3 class="mb-4 d-inline">Lista de Movimentações</h3>
-            <a href="mes_create.php" class="btn btn-success rounded-circle float-end">+</a>
+            <a href="movimentacao_create.php" class="btn btn-success rounded-circle float-end">+</a>
         </div>
         <div class="card-body">
             <table class="table table-bordered table-striped">
@@ -68,10 +68,10 @@ $movimentacoes = mysqli_query($conn, $sql);
                             <td><?php echo $movimentacao['descricao']; ?></td>
                             <td>
                                 <div class="d-flex align-items-center gap-2">
-                                    <a href="edit_mes.php?id=<?= $movimentacao['id'] ?>" class="btn btn-warning btn-sm">
+                                    <a href="edit_movimentacao.php?id=<?= $movimentacao['id'] ?>" class="btn btn-warning btn-sm">
                                         <i class="bi bi-pencil-fill"></i>Editar</a>
-                                    <form action="acoes_mes.php" method="POST" class="d-inline">
-                                        <button onclick="return confirm('Tem certeza que deseja excluir?')" name="delete_mes" type="submit" value="<?= $movimentacao['id']; ?>" class="btn btn-danger btn-sm">
+                                    <form action="acoes_movimentacao.php" method="POST" class="d-inline">
+                                        <button onclick="return confirm('Tem certeza que deseja excluir?')" name="delete_movimentacao" type="submit" value="<?= $movimentacao['id']; ?>" class="btn btn-danger btn-sm">
                                             <i class="bi bi-trash-fill"></i>Excluir
                                         </button>
                                     </form>
@@ -83,8 +83,6 @@ $movimentacoes = mysqli_query($conn, $sql);
             </table>
         </div>
     </div>
-
-
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="./src/script.js"></script>

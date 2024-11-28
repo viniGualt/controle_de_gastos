@@ -51,7 +51,7 @@ INSERT INTO `lista_categoria` (`id_categoria`, `nome_categoria`, `gasto_categori
 
 CREATE TABLE `meses` (
   `id_mes` int(11) NOT NULL,
-  `nome_mes` varchar(20) NOT NULL,
+  `nome_mes` int(12) NOT NULL,
   `ano` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 

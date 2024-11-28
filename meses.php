@@ -45,32 +45,32 @@ if ($contabilidade_result) {
 <body>
     <?php include 'navbar.php'; ?>
     <div class="container mt-5">
-        <h1 class="mb-4">Lista de Meses</h1>
-        <div class="table">
-            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <a href="mes_create.php" class="btn btn-success">Adicionar Mês</a>
-            </div>
+    <div class="d-flex justify-content-between align-items-center mb-4" style="max-width: 800px; margin: 0 auto;">
+        <h1 class="mb-0">Lista de Meses</h1>
+        <a href="mes_create.php" class="btn btn-success">Adicionar Mês</a>
         </div>
-        <div class="card mb-4">
+        <div class="card mb-4 border border-dark" style="max-width: 800px; margin: 0 auto;">
+        <div class="card-body">
             <div class="card-body">
-                <table class="table table-bordered table-striped">
+                <table class="table table-bordered table-striped table-sm">
                     <thead>
                         <tr>
                             <th>ID</th>
                             <th>Mês</th>
                             <th>Ano</th>
-                            <th>Ações</th>
+                            <th class="text-center">Ações</th>
                         </tr>
                     </thead>
                     <tbody>
+                        <?php $contador = 1; ?>
                         <?php foreach ($contabilidades as $contabilidade): ?>
                             <tr>
-                                <td><?php echo $contabilidade['id_mes']; ?></td>
-                                <td><?php echo $meses[$contabilidade['nome_mes']]; ?></td>
+                                <td><?php echo $contador++; ?></td>
+                                <td><?php echo $meses[(int)$contabilidade['nome_mes']]; ?></td>
                                 <td><?php echo $contabilidade['ano']; ?></td>
-                                <td>
-                                    <div class="d-flex align-items-center gap-2">
-                                        <a href="edit_mes.php?id=<?= $contabilidade['id_mes'] ?>" class="btn btn-warning btn-sm">
+                                <td class="text-center">
+                                <div class="d-flex justify-content-center align-items-center gap-3">
+                                    <a href="edit_mes.php?id_mes=<?= $contabilidade['id_mes'] ?>" class="btn btn-warning btn-sm">
                                             <i class="bi bi-pencil-fill"></i>Editar</a>
                                         <form action="acoes_mes.php" method="POST" class="d-inline">
                                             <button onclick="return confirm('Tem certeza que deseja excluir?')" name="delete_mes" type="submit" value="<?= $contabilidade['id_mes']; ?>" class="btn btn-danger btn-sm">
@@ -89,5 +89,4 @@ if ($contabilidade_result) {
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
 </html>

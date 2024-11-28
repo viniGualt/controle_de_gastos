@@ -8,9 +8,9 @@ if (!isset($_GET['id_mes']) || empty($_GET['id_mes'])) {
     header('Location: meses.php');
     exit();
 } else {
-    $id_mes = mysqli_real_escape_string($conn, $_GET['id_mes']); 
+    $id_mes = mysqli_real_escape_string($conn, $_GET['id_mes']);
 
-    $sql = "SELECT * FROM contabilidade WHERE id_mes = '{$id_mes}'";
+    $sql = "SELECT * FROM meses WHERE id_mes = '{$id_mes}'";
     $query = mysqli_query($conn, $sql);
 
     if (mysqli_num_rows($query) > 0) {
@@ -33,40 +33,38 @@ if (!isset($_GET['id_mes']) || empty($_GET['id_mes'])) {
 </head>
 
 <body>
-    <div class="container mt-5">
+    <div class="container mt-5" style="max-width: 800px; margin: 0 auto;">
         <h1 class="mb-4">Edição do Mês</h1>
         <?php if (!empty($contabilidade)): ?>
-            <form action="acoes_mes.php" method="POST">
-                <input type="hidden" name="id_mes" value="<?= $contabilidade['id_mes']; ?>">
-
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <div class="mb-3">
-                            <label for="nome_mes" class="form-label">Nome do Mês</label>
-                            <select class="form-select" name="id_mes" id="id_mes" aria-label="Default select example">
-                            <option selected>Selecione um mês</option>
-                            <option value="1">Janeiro</option>
-                            <option value="2">Fevereiro</option>
-                            <option value="3">Março</option>
-                            <option value="4">Abril</option>
-                            <option value="5">Maio</option>
-                            <option value="6">Junho</option>
-                            <option value="7">Julho</option>
-                            <option value="8">Agosto</option>
-                            <option value="9">Setembro</option>
-                            <option value="10">Outubro</option>
-                            <option value="11">Novembro</option>
-                            <option value="12">Dezembro</option>
-                        </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="ano" class="form-label">Ano</label>
-                            <input type="number" id="ano" name="ano" class="form-control" value="<?= $contabilidade['ano'] ?>" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Salvar</button>
-                    </div>
-                </div>
-            </form>
+           <form action="acoes_mes.php" method="POST">
+    <input type="hidden" name="id_mes" value="<?= $contabilidade['id_mes']; ?>">
+    <div class="card mb-4 border border-dark">
+        <div class="card-body">
+            <div class="mb-3">
+                <label for="nome_mes" class="form-label">Nome do Mês</label>
+                <select class="form-select" name="nome_mes" id="nome_mes">
+                    <option value="1" <?= $contabilidade['nome_mes'] == 1 ? 'selected' : ''; ?>>Janeiro</option>
+                    <option value="2" <?= $contabilidade['nome_mes'] == 2 ? 'selected' : ''; ?>>Fevereiro</option>
+                    <option value="3" <?= $contabilidade['nome_mes'] == 3 ? 'selected' : ''; ?>>Março</option>
+                    <option value="4" <?= $contabilidade['nome_mes'] == 4 ? 'selected' : ''; ?>>Abril</option>
+                    <option value="5" <?= $contabilidade['nome_mes'] == 5 ? 'selected' : ''; ?>>Maio</option>
+                    <option value="6" <?= $contabilidade['nome_mes'] == 6 ? 'selected' : ''; ?>>Junho</option>
+                    <option value="7" <?= $contabilidade['nome_mes'] == 7 ? 'selected' : ''; ?>>Julho</option>
+                    <option value="8" <?= $contabilidade['nome_mes'] == 8 ? 'selected' : ''; ?>>Agosto</option>
+                    <option value="9" <?= $contabilidade['nome_mes'] == 9 ? 'selected' : ''; ?>>Setembro</option>
+                    <option value="10" <?= $contabilidade['nome_mes'] == 10 ? 'selected' : ''; ?>>Outubro</option>
+                    <option value="11" <?= $contabilidade['nome_mes'] == 11 ? 'selected' : ''; ?>>Novembro</option>
+                    <option value="12" <?= $contabilidade['nome_mes'] == 12 ? 'selected' : ''; ?>>Dezembro</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="ano" class="form-label">Ano</label>
+                <input type="number" id="ano" name="ano" min="2000" max="2050" class="form-control" value="<?= $contabilidade['ano'] ?>" required>
+            </div>
+            <button type="submit" name="edit_mes" class="btn btn-primary">Salvar</button>
+        </div>
+    </div>
+</form>
         <?php else: ?>
             <div class="alert alert-warning alert-dismissible fade show" role="alert">
                 Mês não encontrado.
