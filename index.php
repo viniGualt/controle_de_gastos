@@ -6,11 +6,20 @@ $sql = 'SELECT mov.*, mes.nome_mes, mes.ano, cat.nome_categoria FROM movimentaco
         JOIN meses mes ON mov.data = mes.id_mes
         JOIN lista_categoria cat ON cat.id_categoria = mov.id_categoria';
 
-$movimentacoes = mysqli_query($conn, $sql);
-
 $sqlMeses = "SELECT * FROM meses ORDER BY ano, id_mes";
 $queryMeses = mysqli_query($conn, $sqlMeses);
-$filtroMes = isset($_GET['filtro_mes']);
+
+if (isset($_GET['filtro_mes']) && !empty($_GET['filtro_mes'])) {
+    $filtroMes = $_GET['filtro_mes'];
+} else {
+    $filtroMes = null;
+}
+
+if ($filtroMes) {
+    $sql .= " WHERE mes.id_mes = " . intval($filtroMes);
+}
+
+$movimentacoes = mysqli_query($conn, $sql);
 
 $saldo = 0;
 
@@ -40,8 +49,10 @@ $saldo = 0;
                             <select name="filtro_mes" class="form-select me-2" style="width: auto;">
                                 <option value="">Todos os meses</option>
                                 <?php foreach ($queryMeses as $mes): ?>
-                                    <option value="<?= $mes['id_mes']; ?>" <?= $filtroMes == $mes['id_mes'] ? 'selected' : ''; ?>>
-                                        <?= $mes['nome_mes'] . ' / ' . $mes['ano']; ?>
+                                    <option value="<?= $mes['id_mes']; ?>" <?php if ($filtroMes == $mes['id_mes']) {
+                                                                                echo 'selected';
+                                                                            } ?>>
+                                        <?= $meses[$mes['nome_mes']] . ' / ' . $mes['ano']; ?>
                                     </option>
                                 <?php endforeach; ?>
                             </select>

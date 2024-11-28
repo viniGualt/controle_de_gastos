@@ -2,23 +2,11 @@
 session_start();
 require_once('conexao.php');
 
-$meses = [
-    1 => 'Janeiro',
-    2 => 'Fevereiro',
-    3 => 'Março',
-    4 => 'Abril',
-    5 => 'Maio',
-    6 => 'Junho',
-    7 => 'Julho',
-    8 => 'Agosto',
-    9 => 'Setembro',
-    10 => 'Outubro',
-    11 => 'Novembro',
-    12 => 'Dezembro'
-];
-
 $sqlCategorias = "SELECT * FROM lista_categoria";
-$resultCategorias = mysqli_query($conn, $sqlCategorias);
+$queryCategorias = mysqli_query($conn, $sqlCategorias);
+
+$sqlMeses = "SELECT * FROM meses";
+$queryMeses = mysqli_query($conn, $sqlMeses);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $data = $_POST['data'];
@@ -28,10 +16,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if (!empty($data) && !empty($valor) && !empty($id_categoria) && !empty($descricao)) {
         $sqlInsert = "INSERT INTO movimentacoes (data, valor, id_categoria, descricao) VALUES ('$data', '$valor', '$id_categoria', '$descricao')";
-        
+
         if (mysqli_query($conn, $sqlInsert)) {
             $_SESSION['msg'] = "Movimentação cadastrada com sucesso!";
-            header("Location: index.php"); 
+            header("Location: index.php");
             exit();
         } else {
             $_SESSION['msg'] = "Erro ao cadastrar movimentação: " . mysqli_error($conn);
@@ -57,23 +45,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     <div class="container mt-5" style="max-width: 800px; margin: 0 auto;">
         <h1 class="mb-4">Criar Nova Movimentação</h1>
-        
-        <?php if (isset($_SESSION['msg'])): ?>
-            <div class="alert alert-info">
-                <?= $_SESSION['msg']; unset($_SESSION['msg']); ?>
-            </div>
-        <?php endif; ?>
-
         <form method="POST" action="movimentacao_create.php">
             <div class="mb-3">
                 <label for="data" class="form-label">Mês/Ano</label>
                 <select name="data" id="data" class="form-select" required>
-                    <?php foreach ($meses as $mes_id => $mes_nome): ?>
-                        <option value="<?php echo $mes_id; ?>"><?php echo $mes_nome; ?></option>
+                    <?php foreach ($queryMeses as $mes): ?>
+                        <option value="<?= $mes['id_mes']; ?>"> <?php echo $meses[$mes['nome_mes']] . "/" . $mes['ano'] ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>
-            
+
             <div class="mb-3">
                 <label for="valor" class="form-label">Valor</label>
                 <input type="number" step="0.01" name="valor" id="valor" class="form-control" required>
@@ -82,9 +63,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="mb-3">
                 <label for="id_categoria" class="form-label">Categoria</label>
                 <select name="id_categoria" id="id_categoria" class="form-select" required>
-                    <?php while ($categoria = mysqli_fetch_assoc($resultCategorias)): ?>
-                        <option value="<?php echo $categoria['id_categoria']; ?>"><?php echo $categoria['nome_categoria']; ?></option>
-                    <?php endwhile; ?>
+                    <?php foreach ($queryCategorias as $categoria): ?>
+                        <option value="<?= $categoria['id_categoria']; ?>"> <?php echo $categoria['nome_categoria']?></option>
+                    <?php endforeach; ?>
                 </select>
             </div>
 

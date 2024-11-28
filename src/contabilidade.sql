@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 26/11/2024 às 00:47
+-- Tempo de geração: 28/11/2024 às 03:53
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -51,7 +51,7 @@ INSERT INTO `lista_categoria` (`id_categoria`, `nome_categoria`, `gasto_categori
 
 CREATE TABLE `meses` (
   `id_mes` int(11) NOT NULL,
-  `nome_mes` int(12) NOT NULL,
+  `nome_mes` varchar(20) NOT NULL,
   `ano` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -60,7 +60,8 @@ CREATE TABLE `meses` (
 --
 
 INSERT INTO `meses` (`id_mes`, `nome_mes`, `ano`) VALUES
-(1, '1', -2041);
+(1, '1', 2011),
+(3, '2', 2022);
 
 -- --------------------------------------------------------
 
@@ -75,6 +76,16 @@ CREATE TABLE `movimentacoes` (
   `id_categoria` int(11) NOT NULL,
   `descricao` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `movimentacoes`
+--
+
+INSERT INTO `movimentacoes` (`id`, `data`, `valor`, `id_categoria`, `descricao`) VALUES
+(1, 1, -690.00, 2, 'Gasto com mensalidade de faculdade'),
+(3, 1, 390.00, 4, 'Gasto com mercado'),
+(4, 1, 2000.00, 1, 'Ganho no tigrinho'),
+(5, 3, -1290.00, 2, 'Teste');
 
 --
 -- Índices para tabelas despejadas
@@ -97,8 +108,8 @@ ALTER TABLE `meses`
 --
 ALTER TABLE `movimentacoes`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `data` (`data`),
-  ADD KEY `id_categoria` (`id_categoria`);
+  ADD KEY `movimentacoes_ibfk_1` (`data`),
+  ADD KEY `movimentacoes_ibfk_2` (`id_categoria`);
 
 --
 -- AUTO_INCREMENT para tabelas despejadas
@@ -114,13 +125,13 @@ ALTER TABLE `lista_categoria`
 -- AUTO_INCREMENT de tabela `meses`
 --
 ALTER TABLE `meses`
-  MODIFY `id_mes` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_mes` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de tabela `movimentacoes`
 --
 ALTER TABLE `movimentacoes`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Restrições para tabelas despejadas
@@ -130,8 +141,8 @@ ALTER TABLE `movimentacoes`
 -- Restrições para tabelas `movimentacoes`
 --
 ALTER TABLE `movimentacoes`
-  ADD CONSTRAINT `movimentacoes_ibfk_1` FOREIGN KEY (`data`) REFERENCES `meses` (`id_mes`),
-  ADD CONSTRAINT `movimentacoes_ibfk_2` FOREIGN KEY (`id_categoria`) REFERENCES `lista_categoria` (`id_categoria`);
+  ADD CONSTRAINT `movimentacoes_ibfk_1` FOREIGN KEY (`data`) REFERENCES `meses` (`id_mes`) ON DELETE CASCADE,
+  ADD CONSTRAINT `movimentacoes_ibfk_2` FOREIGN KEY (`id_categoria`) REFERENCES `lista_categoria` (`id_categoria`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
