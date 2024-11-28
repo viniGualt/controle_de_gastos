@@ -31,3 +31,7 @@ Onde são listadas as categorias de movimentações, com a possibilidade de adic
 ### 4.  Meses
 Onde são gerenciados os meses, é possível adicionar e editar os meses de controle financeiro.
 
+<div align="center">Projeto desenvolvido por:</div> <br>
+<div align="center">Vinícius Gualtieri Moraes</div>
+<div align="center">Kauã Henrique Zeferino Santana</div>
+<div align="center">Matheus Thierry Santos da Silva</div>
